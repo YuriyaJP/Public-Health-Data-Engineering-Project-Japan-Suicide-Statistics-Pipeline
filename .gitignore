@@ -1,6 +1,9 @@
 # Ignore raw data directory (large PDFs and raw downloads)
 data_raw/
 
+# Ignore generated CSV outputs (if you store them under data_raw/csvs)
+data_raw/csvs/
+
 # Bytecode and caches
 __pycache__/
 *.py[cod]
