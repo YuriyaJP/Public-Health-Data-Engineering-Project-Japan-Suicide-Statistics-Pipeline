@@ -1,0 +1,9 @@
+# Ignore raw data directory (large PDFs and raw downloads)
+data_raw/
+
+# Bytecode and caches
+__pycache__/
+*.py[cod]
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
