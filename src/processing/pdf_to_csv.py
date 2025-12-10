@@ -1,22 +1,3 @@
-"""
-Simple PDF -> CSV extraction script.
-
-Assumptions:
-- Your raw PDFs are in `data_raw/raw_pdfs` (default). You asked to include the path to all PDFs in raw data; that path is the default used by this script.
-- `pdfplumber` and `pandas` are used to extract table-like data. They are listed in `requirements.txt` already.
-
-Usage example:
-  python src/processing/pdf_to_csv.py --pdf-dir data_raw/raw_pdfs --out-dir data_raw/csvs
-
-This script will scan the pdf directory, attempt to extract tables from each page using pdfplumber,
-and write each table found to a separate CSV file named like:
-  {pdf_name}_page{page_num}_table{table_idx}.csv
-
-Edge cases:
-- If no tables are found on a page, nothing is written for that page (a message is printed).
-- This script focuses on table extraction; free-form text extraction is out of scope for now.
-"""
-
 from pathlib import Path
 import argparse
 import os
