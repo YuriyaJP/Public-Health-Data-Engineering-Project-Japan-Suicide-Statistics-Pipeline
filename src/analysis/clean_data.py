@@ -1,20 +1,54 @@
 import pandas as pd
+import os
 
-# ============================================================
-# 1. Clean page32 (age breakdown table)
-# ============================================================
+# ========= Helper functions =========
 
-file1 = "/home/yulia-chekhovska/Public-Health-Data-Engineering-Project-Japan-Suicide-Statistics-Pipeline/data_raw/csvs/R6jisatsunojoukyou_page32_table1.csv"
-df = pd.read_csv(file1)
+def clean_simple_table(df, name):
+    """
+    For page31 and page33-like tables: they have unnamed first column and numeric values.
+    """
+    # Rename first unnamed column to 年
+    first_col = df.columns[0]
+    df = df.rename(columns={first_col: "年"})
 
-# Rename the first column to 年
-df.rename(columns={"Unnamed: 0": "年"}, inplace=True)
+    # Melt into long format
+    df_long = df.melt(id_vars=["年"], var_name="category", value_name="value")
 
-# Melt to tidy long format
-df_long = df.melt(id_vars=["年"], var_name="年齢層", value_name="人数")
+    # Save
+    out_path = f"/home/yulia-chekhovska/Public-Health-Data-Engineering-Project-Japan-Suicide-Statistics-Pipeline/data_processed/{name}_cleaned.csv"
+    df_long.to_csv(out_path, index=False, encoding="utf-8-sig")
 
-# Save cleaned version
-df_long.to_csv(
+    print(f"Saved {name} cleaned table to data_processed/")
+    return df_long
+
+
+def clean_problem_table(df, name):
+    """
+    For tables like page30_table3 and page30_table4: they have Unnamed column + problem types.
+    """
+    df = df.rename(columns={"Unnamed: 0": "年"})
+
+    df_long = df.melt(id_vars=["年"], 
+                      var_name="問題分類", 
+                      value_name="人数")
+
+    out_path = f"/home/yulia-chekhovska/Public-Health-Data-Engineering-Project-Japan-Suicide-Statistics-Pipeline/data_processed/{name}_cleaned.csv"
+    df_long.to_csv(out_path, index=False, encoding="utf-8-sig")
+
+    print(f"Saved {name} cleaned table to data_processed/")
+    return df_long
+
+
+# ========= Load base age table (already working) =========
+
+file_age = "/home/yulia-chekhovska/Public-Health-Data-Engineering-Project-Japan-Suicide-Statistics-Pipeline/data_raw/csvs/R6jisatsunojoukyou_page32_table1.csv"
+df_age = pd.read_csv(file_age)
+
+df_age.rename(columns={"Unnamed: 0": "年"}, inplace=True)
+
+df_age_long = df_age.melt(id_vars=["年"], var_name="年齢層", value_name="人数")
+
+df_age_long.to_csv(
     "/home/yulia-chekhovska/Public-Health-Data-Engineering-Project-Japan-Suicide-Statistics-Pipeline/data_processed/R6jisatsunojoukyou_page32_table1_cleaned.csv",
     index=False,
     encoding="utf-8-sig"
@@ -22,26 +56,31 @@ df_long.to_csv(
 
 print("Saved page32 cleaned table to data_processed/")
 
-# ============================================================
-# 2. Load the four other raw tables
-# ============================================================
+
+# ========= Load the other raw tables =========
 
 base = "/home/yulia-chekhovska/Public-Health-Data-Engineering-Project-Japan-Suicide-Statistics-Pipeline/data_raw/csvs/"
 
-file_page33 = base + "R6jisatsunojoukyou_page33_table1.csv"
-file_page31 = base + "R6jisatsunojoukyou_page31_table1.csv"
-file_page30_3 = base + "R6jisatsunojoukyou_page30_table3.csv"
-file_page30_4 = base + "R6jisatsunojoukyou_page30_table4.csv"
+paths = {
+    "page33": base + "R6jisatsunojoukyou_page33_table1.csv",
+    "page31": base + "R6jisatsunojoukyou_page31_table1.csv",
+    "page30_table3": base + "R6jisatsunojoukyou_page30_table3.csv",
+    "page30_table4": base + "R6jisatsunojoukyou_page30_table4.csv",
+}
 
-page33 = pd.read_csv(file_page33)
-page31 = pd.read_csv(file_page31)
-page30_table3 = pd.read_csv(file_page30_3)
-page30_table4 = pd.read_csv(file_page30_4)
+dataframes = {}
+
+for name, path in paths.items():
+    df = pd.read_csv(path)
+    dataframes[name] = df
+    print(f"{name} columns:", list(df.columns))
 
 print("Loaded page33, page31, page30_table3, page30_table4")
 
-# Quick preview to verify columns
-print("page33 columns:", list(page33.columns))
-print("page31 columns:", list(page31.columns))
-print("page30_table3 columns:", list(page30_table3.columns))
-print("page30_table4 columns:", list(page30_table4.columns))
+
+# ========= Clean and save them =========
+
+clean_simple_table(dataframes["page33"], "page33")
+clean_simple_table(dataframes["page31"], "page31")
+clean_problem_table(dataframes["page30_table3"], "page30_table3")
+clean_problem_table(dataframes["page30_table4"], "page30_table4")
