@@ -1,4 +1,4 @@
-# Japan Suicide Statistics Forecasting and Policy Impact Analysis
+# Japan Suicide Statistics Forecasting, Economic and Policy Impact Analysis
 
 This project builds a sustainable, automated pipeline for Japan police suicide statistics, providing interactive dashboards, time-series forecasting, and economic impact analysis to inform public health interventions.
 
