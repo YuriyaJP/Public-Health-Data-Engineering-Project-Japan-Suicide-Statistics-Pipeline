@@ -5,7 +5,7 @@ This project builds a sustainable, automated pipeline for Japan police suicide s
 ## Features
 - **Data Engineering:** Web scraping, cleaning, and building a self-updating pipeline.  
 - **Data Visualization:** Interactive dashboards showing demographic and temporal trends.  
-- **Time-Series Forecasting:** Linear regression and ARIMA models to predict suicide trends by age and gender.  
+- **Time-Series Forecasting:** Linear regression and ARIMA models to predict suicide trends by age and gender. I attempted time series forecasting for age-specific suicide counts using Prophet. However, due to the small dataset and high variability in some age groups, predictive performance was poor (R² negative).
 - **Economic Impact Analysis:** Estimates lost lifetime tax revenue and productivity to quantify cost-effectiveness of interventions.  
 - **Policy-Relevant Outputs:** Scenario modeling to project the effects of school, workplace, and regional interventions.
 
@@ -25,9 +25,12 @@ Cleaned datasets are available in the `data_processed/` folder.
 - Handling missing values and standardizing categorical features  
 
 ## Key Files
-- `suicide_pipeline.ipynb`  
+- `suicide-data-viz.ipynb`
+  - Evidence synthesis (age, gender, reason cross-analysis)
+  - Critical analysis (identify patterns and anomalies)
+- `time-series-forecast.ipynb`  
   - Implements data cleaning, dashboard creation, and forecasting  
-  - Contains regression and ARIMA modeling  
+  - Contains regression and ARIMA modeling  with poor results
   - Computes economic impact metrics and scenario simulations  
 - `data_processed/*.csv`  
   - Cleaned source datasets ready for analysis  
@@ -35,4 +38,4 @@ Cleaned datasets are available in the `data_processed/` folder.
 ## Usage
 Install dependencies:  
 ```bash
-pip install numpy pandas matplotlib seaborn statsmodels plotly
+requirements.txt
