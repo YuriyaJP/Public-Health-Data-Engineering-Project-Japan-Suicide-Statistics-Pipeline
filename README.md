@@ -28,12 +28,12 @@ Cleaned datasets are available in the `data_processed/` folder.
 - `suicide-data-viz.ipynb`
   - Evidence synthesis (age, gender, reason cross-analysis)
   - Critical analysis (identify patterns and anomalies)
+  - Economic Impact Analysis
 - `time-series-forecast.ipynb`  
-  - Implements data cleaning, dashboard creation, and forecasting  
-  - Contains regression and ARIMA modeling  with poor results
-  - Computes economic impact metrics and scenario simulations  
+  - Contains regression, XGBoost, Prophet and ARIMA modeling all with poor results 
 - `data_processed/*.csv`  
-  - Cleaned source datasets ready for analysis  
+  - Cleaned source datasets ready for analysis
+  - Contains data collection and cleaning
 
 ## Usage
 Install dependencies:  
