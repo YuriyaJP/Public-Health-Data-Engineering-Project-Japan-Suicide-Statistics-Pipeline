@@ -221,3 +221,90 @@ if __name__ == "__main__":
     create_policy_scenario_comparison(df_policy).write_html("charts/policy_scenario_comparison.html")
 
     print("✅ All charts generated with modern visual styling.")
+
+
+import numpy as np
+import plotly.graph_objects as go
+
+# =========================
+# DATA (FROM YOUR MODEL)
+# =========================
+
+YOUTH_POPULATION = 6_950_000
+SUICIDE_RATE_PER_100K = 20.8914772727
+
+reach_pct = np.linspace(0.008, 0.02, 60)     # 0.8% → 2.0%
+effectiveness = np.linspace(0.15, 0.35, 60)
+
+R, E = np.meshgrid(reach_pct, effectiveness)
+
+individuals_reached = R * YOUTH_POPULATION
+expected_deaths = individuals_reached * SUICIDE_RATE_PER_100K / 100_000
+lives_saved = expected_deaths * E
+
+# =========================
+# CONTOUR PLOT
+# =========================
+
+fig = go.Figure()
+
+fig.add_trace(go.Contour(
+    x=reach_pct * 100,
+    y=effectiveness * 100,
+    z=lives_saved,
+    colorscale=COLOR_SCALE_GREEN,
+    contours=dict(
+        showlabels=True,
+        labelfont=dict(size=12)
+    ),
+    hovertemplate=(
+        "Reach: %{x:.2f}%<br>"
+        "Effectiveness: %{y:.1f}%<br>"
+        "Lives saved: %{z:.2f}<extra></extra>"
+    )
+))
+
+# =========================
+# SCENARIO POINTS
+# =========================
+
+scenarios = {
+    "Conservative": (1.15, 15, 2.50),
+    "Moderate": (1.15, 25, 4.16),
+    "Optimistic": (1.15, 35, 5.83)
+}
+
+for name, (r, e, z) in scenarios.items():
+    fig.add_trace(go.Scatter(
+        x=[r],
+        y=[e],
+        mode="markers+text",
+        marker=dict(size=10, color="#0B5D3B"),
+        text=[name],
+        textposition="top center",
+        hovertemplate=(
+            f"{name}<br>"
+            f"Reach: {r:.2f}%<br>"
+            f"Effectiveness: {e:.0f}%<br>"
+            f"Lives saved: {z:.2f}<extra></extra>"
+        ),
+        showlegend=False
+    ))
+
+# =========================
+# LAYOUT
+# =========================
+
+fig.update_layout(
+    title="Iso-Impact Map: Annual Lives Saved",
+    xaxis_title="Program Reach (% of youth population)",
+    yaxis_title="Intervention Effectiveness (%)",
+    margin=dict(l=60, r=40, t=60, b=60)
+)
+
+apply_global_layout(fig)
+
+fig.write_html(
+    "impact_contour_lives_saved.html",
+    include_plotlyjs="cdn"
+)

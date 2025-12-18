@@ -1,0 +1,149 @@
+{
+  "program_parameters": {
+    "schools_reached": 145,
+    "workshops_delivered": 97,
+    "hotline_contacts": 9000,
+    "program_cost_jpy": 10000000,
+    "program_cost_million": 10.0
+  },
+  "youth_suicide_data": {
+    "total_suicides": 36769,
+    "annual_average": 2298.0625,
+    "most_recent_year": 2024,
+    "most_recent_year_count": 799,
+    "rate_per_100k": 20.891477272727272,
+    "year_range": "2009-2024",
+    "data_source": "../../data_clean/master_cleaned_dataset.csv"
+  },
+  "reach_metrics": {
+    "schools_reached": 145,
+    "total_schools_japan": 13900,
+    "school_coverage_pct": 1.0431654676258995,
+    "workshops_delivered": 97,
+    "students_in_workshops": 72500,
+    "hotline_contacts_raw": 9000,
+    "unique_hotline_contacts": 7200,
+    "total_individuals_reached": 79700,
+    "national_student_population": 6950000,
+    "population_coverage_pct": 1.1467625899280576
+  },
+  "baseline_risk": {
+    "expected_deaths_no_intervention": 16.650507386363635,
+    "suicide_rate_per_100k": 20.891477272727272
+  },
+  "impact_scenarios": {
+    "conservative": {
+      "effectiveness_rate": 0.15,
+      "lives_saved_annually": 2.4975761079545453,
+      "dalys_averted": 167.33759923295455,
+      "years_of_life_per_person": 67,
+      "work_years_per_person": 48,
+      "cost_per_life_saved_jpy": 4003881.991083651,
+      "cost_per_life_saved_million": 4.0038819910836505,
+      "cost_per_daly_jpy": 59759.432702741055,
+      "cost_per_daly_usd": 398.3962180182737,
+      "cost_per_person_reached_jpy": 125.47051442910916,
+      "lifetime_value_per_person": {
+        "gross_earnings_jpy": 216000000,
+        "gross_earnings_million": 216.0,
+        "tax_revenue_jpy": 54000000.0,
+        "tax_revenue_million": 54.0
+      },
+      "aggregate_economic_impact": {
+        "total_economic_value_jpy": 539476439.3181818,
+        "total_economic_value_million": 539.4764393181817,
+        "total_tax_revenue_jpy": 134869109.82954544,
+        "total_tax_revenue_million": 134.86910982954544,
+        "net_benefit_jpy": 529476439.31818175,
+        "net_benefit_million": 529.4764393181817
+      },
+      "return_on_investment": {
+        "roi_gross_earnings": 53.94764393181818,
+        "roi_tax_revenue": 13.486910982954544
+      }
+    },
+    "moderate": {
+      "effectiveness_rate": 0.25,
+      "lives_saved_annually": 4.162626846590909,
+      "dalys_averted": 278.8959987215909,
+      "years_of_life_per_person": 67,
+      "work_years_per_person": 48,
+      "cost_per_life_saved_jpy": 2402329.1946501904,
+      "cost_per_life_saved_million": 2.4023291946501906,
+      "cost_per_daly_jpy": 35855.659621644634,
+      "cost_per_daly_usd": 239.03773081096423,
+      "cost_per_person_reached_jpy": 125.47051442910916,
+      "lifetime_value_per_person": {
+        "gross_earnings_jpy": 216000000,
+        "gross_earnings_million": 216.0,
+        "tax_revenue_jpy": 54000000.0,
+        "tax_revenue_million": 54.0
+      },
+      "aggregate_economic_impact": {
+        "total_economic_value_jpy": 899127398.8636364,
+        "total_economic_value_million": 899.1273988636364,
+        "total_tax_revenue_jpy": 224781849.7159091,
+        "total_tax_revenue_million": 224.7818497159091,
+        "net_benefit_jpy": 889127398.8636364,
+        "net_benefit_million": 889.1273988636364
+      },
+      "return_on_investment": {
+        "roi_gross_earnings": 89.91273988636364,
+        "roi_tax_revenue": 22.47818497159091
+      }
+    },
+    "optimistic": {
+      "effectiveness_rate": 0.35,
+      "lives_saved_annually": 5.827677585227272,
+      "dalys_averted": 390.4543982102272,
+      "years_of_life_per_person": 67,
+      "work_years_per_person": 48,
+      "cost_per_life_saved_jpy": 1715949.424750136,
+      "cost_per_life_saved_million": 1.715949424750136,
+      "cost_per_daly_jpy": 25611.185444031882,
+      "cost_per_daly_usd": 170.74123629354588,
+      "cost_per_person_reached_jpy": 125.47051442910916,
+      "lifetime_value_per_person": {
+        "gross_earnings_jpy": 216000000,
+        "gross_earnings_million": 216.0,
+        "tax_revenue_jpy": 54000000.0,
+        "tax_revenue_million": 54.0
+      },
+      "aggregate_economic_impact": {
+        "total_economic_value_jpy": 1258778358.4090908,
+        "total_economic_value_million": 1258.7783584090907,
+        "total_tax_revenue_jpy": 314694589.6022727,
+        "total_tax_revenue_million": 314.6945896022727,
+        "net_benefit_jpy": 1248778358.4090908,
+        "net_benefit_million": 1248.7783584090907
+      },
+      "return_on_investment": {
+        "roi_gross_earnings": 125.87783584090907,
+        "roi_tax_revenue": 31.469458960227268
+      }
+    }
+  },
+  "who_assessment": {
+    "conservative": {
+      "classification": "HIGHLY COST-EFFECTIVE",
+      "who_threshold_highly_effective_usd": 34000,
+      "who_threshold_cost_effective_usd": 102000,
+      "program_cost_per_daly_usd": 398.3962180182737,
+      "times_below_threshold": 85.34217560880681
+    },
+    "moderate": {
+      "classification": "HIGHLY COST-EFFECTIVE",
+      "who_threshold_highly_effective_usd": 34000,
+      "who_threshold_cost_effective_usd": 102000,
+      "program_cost_per_daly_usd": 239.03773081096423,
+      "times_below_threshold": 142.23695934801134
+    },
+    "optimistic": {
+      "classification": "HIGHLY COST-EFFECTIVE",
+      "who_threshold_highly_effective_usd": 34000,
+      "who_threshold_cost_effective_usd": 102000,
+      "program_cost_per_daly_usd": 170.74123629354588,
+      "times_below_threshold": 199.13174308721588
+    }
+  }
+}
