@@ -110,20 +110,42 @@ def create_suicide_trends_unified():
 
 
 def create_economic_loss_by_age():
+    # Convert annual loss to billions for readability
+    df_econ_plot = df_econ.copy()
+    df_econ_plot['loss_billion'] = df_econ_plot['annual_loss_yen'] / 1e9
+
+    # Horizontal bar chart
     fig = px.bar(
-        df_econ.sort_values('annual_loss_yen'),
-        x='annual_loss_yen', y='age_group',
+        df_econ_plot.sort_values('loss_billion', ascending=True),
+        x='loss_billion',
+        y='age_group',
         orientation='h',
+        text='loss_billion',
+        labels={'loss_billion': 'Annual Loss (Billion ¥)', 'age_group': 'Age Group'},
         title='Annual Economic Loss by Age Group',
-        template='plotly_white'
+        template='plotly_white',
+        color='loss_billion',
+        color_continuous_scale=COLOR_SCALE_GREEN
     )
+
+    # Format text and hover labels
     fig.update_traces(
-        marker_color="#0B5D3B",
-        texttemplate='¥%{x:,.0f}',
-        hovertemplate='Age %{y}<br>Loss: ¥%{x:,.0f}'
+        texttemplate='¥%{x:.1f}B',
+        textposition='outside',
+        hovertemplate='Age %{y}<br>Loss: ¥%{x:.1f}B'
     )
-    fig.update_layout(height=500)
+
+    # Layout adjustments
+    fig.update_layout(
+        height=500,
+        margin=dict(l=80, r=40, t=60, b=40),
+        yaxis_title='Age Group',
+        xaxis_title='Annual Economic Loss (Billion ¥)',
+        coloraxis_showscale=False  # remove unnecessary color legend
+    )
+
     return apply_global_layout(fig)
+
 
 
 def create_roi_by_age():
@@ -142,18 +164,35 @@ def create_roi_by_age():
 
 
 def create_cause_heatmap():
+    # Pivot table: rows = year, columns = cause, values = count proportion
     pivot = df_cause.pivot_table(
         index='year', columns='cause', values='count', aggfunc='sum', fill_value=0
     )
-    pivot = pivot.div(pivot.sum(axis=1), axis=0)
-
+    pivot_pct = pivot.div(pivot.sum(axis=1), axis=0) * 100  # convert to %
+    
+    # Create heatmap
     fig = px.imshow(
-        pivot,
+        pivot_pct,
         aspect='auto',
-        color_continuous_scale=COLOR_SCALE_GREEN,
+        color_continuous_scale='Greens',
+        text_auto='.1f',  # show percentage inside cells
+        labels={'x': 'Cause', 'y': 'Year', 'color': '% of Suicides'},
         title='Proportion of Suicides by Cause Over Time'
     )
-    fig.update_layout(height=600)
+
+    # Layout improvements
+    fig.update_layout(
+        height=600,
+        xaxis_tickangle=-45,
+        xaxis_title='Cause of Suicide',
+        yaxis_title='Year',
+        margin=dict(l=80, r=40, t=60, b=120)
+    )
+
+    # Adjust font
+    fig.update_xaxes(tickfont=dict(size=12))
+    fig.update_yaxes(tickfont=dict(size=12))
+    
     return apply_global_layout(fig)
 
 
