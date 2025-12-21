@@ -5,21 +5,19 @@ This project builds a sustainable, automated pipeline for Japan police suicide s
 Read the full article about my porject here : https://forum.effectivealtruism.org/posts/Sg7ovepZcmY8GKpo3/how-i-attempted-to-measure-the-impact-of-my-nonprofit-s
 
 ## Features
-- **Data Engineering:** Web scraping, cleaning, and building a self-updating pipeline.  
-- **Data Visualization:** Interactive dashboards showing demographic and temporal trends.  
-- **Time-Series Forecasting:** Linear regression and ARIMA models to predict suicide trends by age and gender. I attempted time series forecasting for age-specific suicide counts using Prophet. However, due to the small dataset and high variability in some age groups, predictive performance was poor (R² negative).
-- **Economic Impact Analysis:** Estimates lost lifetime tax revenue and productivity to quantify cost-effectiveness of interventions.  
-- **Policy-Relevant Outputs:** Scenario modeling to project the effects of school, workplace, and regional interventions.
+- **Data Engineering:** Web scraping (script only, website banned), cleaning, and building comprehensive dataset.  
+- **Data Visualization:** Interactive dashboards showing demographic and temporal trends for the youth rates.  
+- **Economic Impact Analysis:** Estimates lost lifetime tax revenue and productivity to quantify cost-effectiveness of intervention.  
 
 ## Dataset
 The dataset contains historical Japan police suicide statistics, segmented by:
 - Year (converted from Japanese eras to Gregorian)  
 - Age group  
 - Gender  
-- Suicide counts  
+- Suicide and attempted suicide counts  
 - Cause classification  
 
-Cleaned datasets are available in the `data_processed/` folder.
+Cleaned datasets are available in the `data_clean/` folder.
 
 ## Preprocessing
 - Japanese era conversion (昭和, 平成, 令和 → Gregorian years)  
@@ -33,9 +31,10 @@ Cleaned datasets are available in the `data_processed/` folder.
   - Economic Impact Analysis
 - `time-series-forecast.ipynb`  
   - Contains regression, XGBoost, Prophet and ARIMA modeling all with poor results 
-- `data_processed/*.csv`  
+- `data_clean/*.csv`  
   - Cleaned source datasets ready for analysis
-  - Contains data collection and cleaning
+  - `suicide_prevention_report.py`
+    - Extracts key economic and epidemiological metrics from the suicide prevention visualization pipeline for downstream reporting and analysis workflows.
 
 ## Usage
 Install dependencies:  

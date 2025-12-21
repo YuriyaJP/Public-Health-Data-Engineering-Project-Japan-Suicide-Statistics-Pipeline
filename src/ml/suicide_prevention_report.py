@@ -5,9 +5,6 @@ Metric Extraction Pipeline for Economic Impact Analysis
 This module extracts key economic and epidemiological metrics from the 
 suicide prevention visualization pipeline for downstream reporting and 
 analysis workflows.
-
-Author: Public Health Data Engineering Project
-Purpose: Generate structured metric outputs for policy reporting
 """
 
 import pandas as pd
