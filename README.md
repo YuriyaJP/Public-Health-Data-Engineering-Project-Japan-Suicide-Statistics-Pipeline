@@ -2,6 +2,8 @@
 
 This project builds a sustainable, automated pipeline for Japan police suicide statistics, providing interactive dashboards, time-series forecasting, and economic impact analysis to inform public health interventions.
 
+Read the full article about my porject here : https://forum.effectivealtruism.org/posts/Sg7ovepZcmY8GKpo3/how-i-attempted-to-measure-the-impact-of-my-nonprofit-s
+
 ## Features
 - **Data Engineering:** Web scraping, cleaning, and building a self-updating pipeline.  
 - **Data Visualization:** Interactive dashboards showing demographic and temporal trends.  
